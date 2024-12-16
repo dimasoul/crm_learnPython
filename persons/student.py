@@ -7,28 +7,28 @@ class Student(Human):
     def __init__(self, name, age, gender):
         super().__init__(name, age, gender)
         self.marks = {}
-        self.students = []
-
-    def __repr__(self):
-        return str(self)
+        self.group = None
 
     def __str__(self):
         return f"{self.name}, {self.age} лет"
 
     def get_grade(self, subject, mark):
-        self.marks[subject] = mark
         print(f"{self.name} получил {mark} по {subject}")
+        self.marks[subject] = mark
 
     def show_marks(self):
         print(f"Оценки студента {self.name}:")
         for self.subject, mark in self.marks.items():
             print(f"{self.subject}: {mark}")
 
-    def enrollment(self, student):
-        if student not in self.students:
-            self.students.append(student)
-            print(f"Оценки студента {self.name}:")
+    def enroll(self, group):
+        self.group = group
+        group.add_student(self)
 
-    def kick(self, student_group):
-        student_group.students.remove(self)
-        print(f"{self.name} отчислен(а) из группы {student_group.group_name}.")
+    def kick(self):
+        if self.group is not None:
+            print(f"{self.name} отчислен из группы {self.group.group_name}.")
+            self.group.remove_student(self)
+            self.group = None
+        else:
+            print(f"{self.name} не состоит в группе.")

@@ -21,7 +21,8 @@ class Teacher(Human):
             print(f"{self.name} не преподает предмет {subject}.")
 
     def conduct_exam(self, exam):
-        print(f"{self.name} проводит экзамен по предмету {exam.subject} для группы {exam.student_group}, который начинается {exam.date_start}")
+        print(f"{self.name} проводит экзамен по предмету {exam.subject} для группы {exam.student_group},"
+              f" который начинается {exam.date_start}")
 
-    def get_subject(self):
+    def get_random_subject(self):
         return random.choice(self.subjects)

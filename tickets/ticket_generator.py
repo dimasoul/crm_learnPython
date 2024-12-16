@@ -10,12 +10,14 @@ class TicketGenerator:
         self.teacher = teacher
         self.subject = subject
         self.student_group = student_group
+        self.MAX_TICKET_COUNT = 16
 
     def get_ticket(self, n):
-        if 0 < n < 15:
-            for ticket in range(n):
-                yield Ticket(faker.sentence(), self.subject, ticket)
-        elif n == 0:
-            raise ValueError("Студенты в группе отсутствуют, генерация билетов невозмоэжна")
-        elif n >= 16:
+        if n < 0:
+            raise ValueError("n не может быть меньше 0.")
+        elif n >= self.MAX_TICKET_COUNT:
             raise ValueError("Максимальное количество билетов превышено")
+        elif n == 0:
+            raise ValueError("Студенты в группе отсутствуют, генерация билетов невозможна.")
+        for ticket in range(n):
+            yield Ticket(faker.sentence(), self.subject, ticket)

@@ -10,7 +10,7 @@ class StudentGroup:
 
     def __iter__(self):
         self.index = 0
-        return self
+        return iter(self.students)
 
     def __next__(self):
         if self.index >= len(self.students):
@@ -18,7 +18,6 @@ class StudentGroup:
         student = self.students[self.index]
         self.index += 1
         return student
-
 
     def __len__(self):
         return len(self.students)
@@ -35,8 +34,11 @@ class StudentGroup:
             print(f"{student.name} зачислен в группу {self.group_name}")
 
     def remove_student(self, student):
-        self.students.remove(student)
-        print(f"{student.name} отчислен из группы {self.group_name}.")
+        if student in self.students:
+            self.students.remove(student)
+            print(f"{student.name} отчислен из группы {self.group_name}.")
+        else:
+            print(f"{student.name} не найден в группе {self.group_name}.")
 
     def kick_all(self):
         """Отчисление всей группы"""
@@ -52,3 +54,4 @@ class StudentGroup:
     def notify(self):
         """Уведомление группы студентов"""
         print(f" Уведомление о начале экзамена для группы {self.group_name}.")
+

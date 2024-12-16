@@ -4,6 +4,3 @@ class Exam:
         self.student_group = student_group
         self.date_start = date_start
         self.date_finish = date_finish
-
-    def end_exam(self, date_finish):
-        pass
